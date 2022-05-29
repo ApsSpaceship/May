@@ -8,8 +8,8 @@ public class Programmers_Lv2_방문길이 {
 	static int[] dc = {0, 0, -1, 1};
 	public static void main(String[] args) {
 		String dirs = "LULLLLLLU";
-		int r = 0;
-		int c = 0;
+		int r = 0; // 현재 위치 r
+		int c = 0; // 현재 위치 c
 		Set<String> set = new HashSet<>();
 		int ans = 0;
 		for(int i = 0; i < dirs.length(); i++) {
@@ -35,10 +35,12 @@ public class Programmers_Lv2_방문길이 {
 				break;
 			}
 			if(nextr >= -5 && nextr <= 5 && nextc >= -5 && nextc <= 5 ) {
-				if(!set.contains(String.valueOf(r)+c+nextr+nextc)) {
+				// 현재위치와 다음에 이동할 위치가 set 안에 존재하지 않아야 방문한적 없는 것
+				// 문자열로 나타내기 위해 가장 첫번째 숫자를 string으로 바꿈
+				if(!set.contains(Integer.toString(r)+c+nextr+nextc)) { 
 					ans++;
-					set.add(String.valueOf(r)+c+nextr+nextc);
-					set.add(String.valueOf(nextr)+nextc+r+c);					
+					set.add(Integer.toString(r)+c+nextr+nextc);
+					set.add(Integer.toString(nextr)+nextc+r+c);					
 				}
 				r = nextr;
 				c = nextc;
