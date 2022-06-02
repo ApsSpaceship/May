@@ -1,18 +1,15 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 
 class Solution {
-	public int solution(String dirs) {
-		Map<String, Boolean> map = new HashMap<>();
+    public int solution(String dirs) {
+        HashSet<String> set = new HashSet<>();
 		int len = dirs.length();
 		int[] dx = { -1, 1, 0, 0 }; // 상하우좌
 		int[] dy = { 0, 0, 1, -1 };
 		int x = 0; // -5~5사용
 		int y = 0;
-		int nx;
-		int ny;
+		int nx, ny;
 		int mode = 0;
-        
 		for (int i = 0; i < len; i++) {
 			switch (dirs.charAt(i)) {
 			case 'U':
@@ -30,15 +27,13 @@ class Solution {
 			}
 			nx = x + dx[mode];
 			ny = y + dy[mode];
-			if (nx < -5 || ny < -5 || nx > 5 || ny > 5) // 범위 벗어나면 무시
+            if (nx < -5 || ny < -5 || nx > 5 || ny > 5)
 				continue;
-			map.put(Integer.toString(nx) + ny + x + y, true); // 양방향 모두 저장
-			map.put(Integer.toString(x) + y + nx + ny, true);
-			x = nx; // 현재 위치 변경
+			set.add(Integer.toString(nx) + ny + x + y);
+			set.add(Integer.toString(x) + y + nx + ny);
+			x = nx;
 			y = ny;
 		}
-
-		int answer = map.size() / 2;
-		return answer;
-	}
+		return set.size()/2;
+    }
 }
